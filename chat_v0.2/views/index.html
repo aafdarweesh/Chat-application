@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+
+	<div id="msgBox" style="overflow:scroll; width:300px; height:300px; border:solid 1px #000"></div><br/>
+
+	<input id="txtToSend"></input>
+	<button type="submit" id="sendButton">Send</button>
+
+	<script type="text/javascript">
+    var ws = new WebSocket("ws://" + location.hostname + ":7575/{{room}}/{{user}}/index");
+    	console.log(ws);
+		var msgBox = document.getElementById('msgBox');
+		var txtToSend = document.getElementById('txtToSend');
+		var sendButton = document.getElementById('sendButton');
+
+    ws.onopen = function() {
+			console.log('Websocket connected.');
+			ws.send("is connected");
+    };
+
+    ws.onmessage = function (evt) {
+			msgBox.innerHTML += evt.data + '<br/>';
+    };
+
+		sendButton.onclick = function () {
+			ws.send(txtToSend.value);
+			txtToSend.value = '';
+		}
+	ws.onclose = function(){
+		console.log("Websocket is diconnected");
+		//ws.send("USER IS DISCONNECTED");
+		//ws.send('{{user}}' + " : USER IS DISCONNECTED" + '<br>')
+	}	
+
+  </script>
+</body>
+</html>

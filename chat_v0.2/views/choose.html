@@ -1,0 +1,28 @@
+%#This code is taken from the internet
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Main</title>
+</head>
+<body>
+    Choose Name:
+    <form id="choose" action="/" method="GET">
+    <input id="user_id"></input>
+    <input type="submit" />
+    </form>
+</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        alert("Please Enter a unique user name ");
+        //I got this code from the internet
+        $(document).ready(function() {
+             $("#choose").submit(function(e) {
+                document.location = $("#user_id").val();
+                e.preventDefault();
+            });
+        });
+
+    </script>
+</html>
